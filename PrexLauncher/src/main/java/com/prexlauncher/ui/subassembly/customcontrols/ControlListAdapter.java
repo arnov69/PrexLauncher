@@ -161,7 +161,7 @@ public class ControlListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             //设置高亮
             int color = controlItemBean.isHighlighted ?
-                    Color.rgb(69, 179, 162) :
+                    Color.rgb(124, 108, 240) :
                     binding.title.getResources().getColor(R.color.primary_text, binding.title.getContext().getTheme());
             binding.title.setTextColor(color);
 
