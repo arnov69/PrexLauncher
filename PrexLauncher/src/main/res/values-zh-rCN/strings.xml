@@ -680,6 +680,7 @@
     <string name="splash_screen_jre21">Java 21 环境，Minecraft 1.20.5+ 依赖 Java 21。</string>
     <string name="splash_screen_jre25">Java 25 环境，Minecraft 26.1+ 依赖 Java 25。</string>
     <string name="splash_screen_apply">同意并安装</string>
+    <string name="splash_console_title">PrexLauncher 安装控制台</string>
 
     <!-- About -->
     <string name="about_tab">关于 %s</string>

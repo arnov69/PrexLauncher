@@ -11,6 +11,7 @@ import com.prexlauncher.feature.unpack.OnTaskRunningListener
 
 class InstallableAdapter(
     private val items: List<InstallableItem>,
+    private val logListener: (String) -> Unit = {},
     private val listener: TaskCompletionListener
 ) : RecyclerView.Adapter<InstallableAdapter.ViewHolder>() {
     @Volatile
@@ -55,6 +56,10 @@ class InstallableAdapter(
                                 item.isRunning = false
                                 item.isFinished = true
                                 updateTaskCount(index)
+                            }
+
+                            override fun onTaskLog(message: String) {
+                                updateUI { logListener(message) }
                             }
                         })
                     }

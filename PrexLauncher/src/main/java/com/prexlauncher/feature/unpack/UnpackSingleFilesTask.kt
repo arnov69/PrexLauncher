@@ -10,9 +10,11 @@ class UnpackSingleFilesTask(val context: Context) : AbstractUnpackTask() {
     override fun isNeedUnpack(): Boolean = true
 
     override fun run() {
+        log("> Unpacking critical single files ...")
         runCatching {
             copyFromAssets(context)
             Tools.copyAssetFile(context, "resolv.conf", PathManager.DIR_DATA, false)
+            log("> Critical files installed")
         }.getOrElse { e("AsyncAssetManager", "Failed to unpack critical components !") }
     }
 }

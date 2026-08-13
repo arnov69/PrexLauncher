@@ -37,6 +37,7 @@ class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
 
     override fun run() {
         listener?.onTaskStart()
+        log("> Installing ${jre.jreName} runtime ...")
         runCatching {
             MultiRTUtils.installRuntimeNamedBinpack(
                 assetManager.open(jre.jrePath + "/universal.tar.xz"),
@@ -48,7 +49,11 @@ class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
                 jre.jreName, launcherRuntimeVersion
             )
             MultiRTUtils.postPrepare(jre.jreName)
-        }.getOrElse { e -> Logging.e("UnpackJREAuto", "Internal JRE unpack failed", e) }
+            log("> ${jre.jreName} installed")
+        }.getOrElse { e ->
+            Logging.e("UnpackJREAuto", "Internal JRE unpack failed", e)
+            log("> ${jre.jreName} install failed")
+        }
         listener?.onTaskEnd()
     }
 }

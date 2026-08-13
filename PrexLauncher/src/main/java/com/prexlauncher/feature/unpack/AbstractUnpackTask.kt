@@ -7,4 +7,8 @@ abstract class AbstractUnpackTask: Runnable {
     fun setTaskRunningListener(listener: OnTaskRunningListener) {
         this.listener = listener
     }
+
+    protected fun log(message: String) {
+        listener?.onTaskLog(message)
+    }
 }

@@ -5,7 +5,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prexlauncher.InfoCenter
 import com.prexlauncher.InfoDistributor
@@ -49,6 +51,7 @@ class SplashActivity : BaseActivity() {
                 if (isStarted) return@setOnClickListener
                 isStarted = true
                 binding.splashText.setText(R.string.splash_screen_installing)
+                showConsole()
                 installableAdapter.startAllTasks()
             }
             isClickable = false
@@ -122,8 +125,33 @@ class SplashActivity : BaseActivity() {
             }
         }
         items.sort()
-        installableAdapter = InstallableAdapter(items) {
+        installableAdapter = InstallableAdapter(
+            items,
+            logListener = { message ->
+                appendConsoleLine(message)
+            }
+        ) {
             toMain()
+        }
+    }
+
+    private fun showConsole() {
+        appendConsoleLine("========================================")
+        appendConsoleLine("  ${InfoDistributor.APP_NAME} Installer Console")
+        appendConsoleLine("  Setting up runtime components ...")
+        appendConsoleLine("========================================")
+        binding.consoleLayout.isVisible = true
+        binding.recyclerView.visibility = View.GONE
+        binding.operateLayout.visibility = View.GONE
+    }
+
+    private fun appendConsoleLine(message: String) {
+        runOnUiThread {
+            binding.consoleText.append(message)
+            binding.consoleText.append("\n")
+            binding.consoleScroll.post {
+                binding.consoleScroll.fullScroll(View.FOCUS_DOWN)
+            }
         }
     }
     
@@ -137,6 +165,9 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun toMain() {
+        appendConsoleLine("========================================")
+        appendConsoleLine("  All components installed. Starting ${InfoDistributor.APP_NAME} ...")
+        appendConsoleLine("========================================")
         startActivity(Intent(this, LauncherActivity::class.java))
         finish()
     }

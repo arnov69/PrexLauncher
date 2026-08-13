@@ -54,9 +54,11 @@ class UnpackComponentsTask(val context: Context, val component: Components) : Ab
     override fun run() {
         listener?.onTaskStart()
         val fileList = am.list("components/${component.component}")
+        log("> Extracting ${component.component} ...")
         for (fileName in fileList!!) {
             Tools.copyAssetFile(context, "components/${component.component}/$fileName", "$rootDir/${component.component}", true)
         }
+        log("> ${component.component} installed")
         listener?.onTaskEnd()
     }
 

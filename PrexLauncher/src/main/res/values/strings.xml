@@ -649,6 +649,7 @@
     <string name="splash_screen_jre21">Java 21 environment, Minecraft 1.20.5+ depends on Java 21.</string>
     <string name="splash_screen_jre25">Java 25 environment, Minecraft 26.1+ depends on Java 25.</string>
     <string name="splash_screen_apply">Agree and Install</string>
+    <string name="splash_console_title">PrexLauncher Installer Console</string>
     <!-- About -->
     <string name="about_tab">About %s</string>
     <string name="about_dec1">%s is a Minecraft launcher based on PojavLauncher and Zalith Launcher that allows Minecraft: Java Edition to run on Android devices.</string>
