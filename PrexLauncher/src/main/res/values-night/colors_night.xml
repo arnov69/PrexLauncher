@@ -1,46 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black_or_white">#FFFFFF</color>
+    <color name="black_or_white">#F2F3F7</color>
 
-    <color name="background_app">#0F0F14</color>
-    <color name="background_app_error">#401A1A</color>
-    <color name="background_overlay">#26262E</color>
-    <color name="background_status_bar">#0F0F14</color>
-    <color name="background_menu_top">#1C1C24</color>
+    <!-- Brand accents -->
+    <color name="accent_primary">#8B7CF7</color>
+    <color name="accent_primary_pressed">#9D90F8</color>
+    <color name="accent_launch">#34D399</color>
+    <color name="accent_danger">#FB7185</color>
+    <color name="accent_amber">#FBBF24</color>
+
+    <!-- Text -->
+    <color name="primary_text">#F2F3F7</color>
+    <color name="text_secondary">#9AA0AE</color>
+    <color name="text_muted">#6B7280</color>
+
+    <!-- Surfaces -->
+    <color name="background_app">#0C0D12</color>
+    <color name="background_app_error">#3A1B24</color>
+    <color name="background_overlay">#23252F</color>
+    <color name="background_status_bar">#0C0D12</color>
+    <color name="background_menu_top">#14161F</color>
     <color name="background_menu_top_error">#E62E0909</color>
-    <color name="background_menu_element">#2A2A36</color>
-    <color name="background_ripple_effect">#D4D5DE</color>
+    <color name="background_menu_element">#2A2D3A</color>
+    <color name="background_ripple_effect">#D5D7E3</color>
+    <color name="divider_color">#23252F</color>
+    <color name="sidebar_background">#10121A</color>
 
-    <color name="button_background">#24242C</color>
-    <color name="button_background_selected">#3B3B49</color>
-    <color name="dialog_background">#1C1C24</color>
+    <!-- Buttons -->
+    <color name="button_background">#23252F</color>
+    <color name="button_background_selected">#3D3F55</color>
+    <color name="dialog_background">#161822</color>
 
-    <color name="menu_bar">#3E3E4A</color>
-    <color name="menu_bar_text">#FFFFFF</color>
-    <color name="menu_overlay">#F01C1C24</color>
+    <!-- Bars -->
+    <color name="menu_bar">#3E4150</color>
+    <color name="menu_bar_text">#F2F3F7</color>
+    <color name="menu_overlay">#F3161822</color>
     <color name="menu_progress">#8B7CF7</color>
 
-    <color name="background_item">#F21C1C24</color>
-    <color name="background_item_selected">#F8333550</color>
-    <color name="background_item_disabled">#D8452828</color>
+    <!-- Items -->
+    <color name="background_item">#F3161822</color>
+    <color name="background_item_selected">#F83D3A63</color>
+    <color name="background_item_disabled">#C22B2E39</color>
     <color name="background_sponsor_intermediate">#80BD6C2D</color>
     <color name="background_sponsor_advanced">#80B83C1F</color>
 
-    <color name="edit_box_fill">#26262F</color>
-    <color name="edit_box_fill_selected">#34354A</color>
+    <!-- Inputs -->
+    <color name="edit_box_fill">#1E202B</color>
+    <color name="edit_box_fill_selected">#2B2C44</color>
 
+    <!-- Misc -->
     <color name="mod_category_fill">#80282836</color>
     <color name="text_background_fill">#B32B2C38</color>
-
     <color name="settings_category">#8B7CF7</color>
-
     <color name="favorite_color">#FF6B88</color>
 
+    <!-- Console -->
     <color name="console_background">#0B0E14</color>
     <color name="console_title_bar">#151A24</color>
     <color name="console_text">#52E0A8</color>
 
-    <color name="icon_color">#FFFFFF</color>
+    <!-- Icons / misc -->
+    <color name="icon_color">#F2F3F7</color>
+    <color name="nav_icon_tint">#7C8291</color>
+    <color name="nav_item_selected">#8B7CF7</color>
+    <color name="stat_icon_bg">#2A2C3E</color>
+    <color name="chip_bg">#23252F</color>
+    <color name="chip_bg_selected">#8B7CF7</color>
+    <color name="mod_enabled_accent">#34D399</color>
+    <color name="mod_disabled_accent">#6B7280</color>
 
-    <color name="primary_text">#F0F1F6</color>
+    <!-- Switch -->
+    <color name="switch_track_off">#2A2D3A</color>
+    <color name="switch_thumb_off">#6B7280</color>
 </resources>

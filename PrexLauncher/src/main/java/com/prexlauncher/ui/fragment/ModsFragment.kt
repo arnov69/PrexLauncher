@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
@@ -41,10 +42,14 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
         const val BUNDLE_ROOT_PATH: String = "root_path"
     }
 
+    private enum class ModFilter { ALL, ENABLED, DISABLED }
+
     private lateinit var binding: FragmentModsBinding
     private lateinit var mSearchViewWrapper: SearchViewWrapper
     private lateinit var mRootPath: String
     private lateinit var openDocumentLauncher: ActivityResultLauncher<Any>
+    private var currentFilter = ModFilter.ALL
+    private var allModBeans: List<FileItemBean> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -171,9 +176,24 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
                 }
 
                 setRefreshListener {
-                    setVisibilityAnim(nothingLayout, isNoFile)
+                    refreshListState()
                 }
             }
+
+            fileRecyclerView.adapter.setModToggleMode(true)
+            fileRecyclerView.adapter.setOnModToggleListener { modFile, enabled ->
+                if (modFile != null) {
+                    Task.runTask {
+                        if (enabled) ModUtils.enableMod(modFile) else ModUtils.disableMod(modFile)
+                    }.ended(TaskExecutors.getAndroidUI()) {
+                        fileRecyclerView.refreshPath()
+                    }.execute()
+                }
+            }
+
+            filterAll.setOnClickListener { setFilter(ModFilter.ALL) }
+            filterEnabled.setOnClickListener { setFilter(ModFilter.ENABLED) }
+            filterDisabled.setOnClickListener { setFilter(ModFilter.DISABLED) }
 
             multiSelectFiles.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
                 selectAll.apply {
@@ -184,11 +204,11 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
                 mSearchViewWrapper.let { if (mSearchViewWrapper.isVisible()) mSearchViewWrapper.setVisibility(!isChecked) }
             }
 
-            operateView.apply {
-                selectAll.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-                    fileRecyclerView.adapter.selectAllFiles(isChecked)
-                }
+            selectAll.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+                fileRecyclerView.adapter.selectAllFiles(isChecked)
+            }
 
+            operateView.apply {
                 returnButton.setOnClickListener {
                     closeMultiSelect()
                     ZHTools.onBackPressed(requireActivity())
@@ -264,6 +284,54 @@ class ModsFragment : FragmentWithAnim(R.layout.fragment_mods) {
             multiSelectFiles.isChecked = false
             selectAll.visibility = View.GONE
         }
+    }
+
+    private fun refreshListState() {
+        val adapter = binding.fileRecyclerView.adapter
+        allModBeans = adapter.data.toList()
+        applyCurrentFilter()
+        updateModsCount()
+    }
+
+    private fun applyCurrentFilter() {
+        val adapter = binding.fileRecyclerView.adapter
+        val filtered = when (currentFilter) {
+            ModFilter.ENABLED -> allModBeans.filter {
+                it.name.endsWith(ModUtils.JAR_FILE_SUFFIX) && !it.name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX)
+            }
+            ModFilter.DISABLED -> allModBeans.filter { it.name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX) }
+            ModFilter.ALL -> allModBeans
+        }
+        adapter.updateItems(filtered)
+        setVisibilityAnim(binding.nothingLayout, adapter.isNoFile())
+    }
+
+    private fun updateModsCount() {
+        val total = allModBeans.count {
+            it.name.endsWith(ModUtils.JAR_FILE_SUFFIX) || it.name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX)
+        }
+        binding.modsCount.text = String.format(getString(R.string.mods_count), total)
+    }
+
+    private fun setFilter(filter: ModFilter) {
+        if (currentFilter == filter) return
+        currentFilter = filter
+        updateFilterChips()
+        applyCurrentFilter()
+    }
+
+    private fun updateFilterChips() {
+        binding.apply {
+            updateFilterChip(filterAll, currentFilter == ModFilter.ALL)
+            updateFilterChip(filterEnabled, currentFilter == ModFilter.ENABLED)
+            updateFilterChip(filterDisabled, currentFilter == ModFilter.DISABLED)
+        }
+    }
+
+    private fun updateFilterChip(chip: View, selected: Boolean) {
+        chip.setBackgroundResource(if (selected) R.drawable.bg_chip_selected else R.drawable.bg_chip)
+        val color = ContextCompat.getColor(requireContext(), if (selected) R.color.menu_bar_text else R.color.text_secondary)
+        if (chip is TextView) chip.setTextColor(color)
     }
 
     private fun getFileSuffix(file: File): String {

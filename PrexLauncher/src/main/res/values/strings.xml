@@ -695,4 +695,31 @@
     <!-- Sponsorship Related -->
     <string name="request_sponsorship_title">Support My Development</string>
     <string name="request_sponsorship_message">Most of the content in this software is developed and maintained by me alone. If you find this software helpful and are in a position to do so, I hope you will consider sponsoring me to give me more motivation to continue developing and improving it. Thank you for your support!</string>
+
+    <!-- Navigation -->
+    <string name="section_home">Home</string>
+    <string name="section_versions">Versions</string>
+    <string name="section_mods">Mods</string>
+    <string name="section_resources">Resource Packs</string>
+    <string name="section_shaders">Shaders</string>
+    <string name="section_settings">Settings</string>
+    <string name="section_download">Downloads</string>
+
+    <!-- Home dashboard -->
+    <string name="home_welcome">Welcome back</string>
+    <string name="home_stat_ram">RAM</string>
+    <string name="home_stat_mods">Mods</string>
+    <string name="home_stat_enabled">Enabled</string>
+    <string name="home_stat_versions">Versions</string>
+    <string name="home_mods_shortcut">Manage Mods</string>
+    <string name="home_resources_shortcut">Resource Packs</string>
+    <string name="home_shaders_shortcut">Shaders</string>
+    <string name="home_quick_access">Quick Access</string>
+
+    <!-- Mods manager -->
+    <string name="mods_actions">Mod Actions</string>
+    <string name="mods_count">%1$d mods</string>
+    <string name="mods_filter_all">All</string>
+    <string name="mods_filter_enabled">Enabled</string>
+    <string name="mods_filter_disabled">Disabled</string>
 </resources>

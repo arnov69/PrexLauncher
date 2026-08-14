@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.prexlauncher.R;
 import com.prexlauncher.databinding.ItemFileListViewBinding;
+import com.prexlauncher.feature.mod.ModUtils;
 import com.prexlauncher.utils.file.FileTools;
 import com.prexlauncher.utils.image.ImageUtils;
 import com.prexlauncher.utils.stringutils.StringUtils;
@@ -29,6 +30,8 @@ public class FileRecyclerAdapter extends RecyclerView.Adapter<FileRecyclerAdapte
     private final List<FileItemBean> mData = new ArrayList<>();
     private final List<FileItemBean> selectedFiles = new ArrayList<>();
     private boolean isMultiSelectMode = false;
+    private boolean modToggleMode = false;
+    private OnModToggleListener onModToggleListener;
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
     private OnMultiSelectListener mOnMultiSelectListener;
@@ -106,6 +109,19 @@ public class FileRecyclerAdapter extends RecyclerView.Adapter<FileRecyclerAdapte
         this.mOnItemClickListener = listener;
     }
 
+    public void setModToggleMode(boolean modToggleMode) {
+        this.modToggleMode = modToggleMode;
+        notifyDataSetChanged();
+    }
+
+    public void setOnModToggleListener(OnModToggleListener listener) {
+        this.onModToggleListener = listener;
+    }
+
+    public interface OnModToggleListener {
+        void onModToggle(File file, boolean enabled);
+    }
+
     public void setOnMultiSelectListener(OnMultiSelectListener listener) {
         this.mOnMultiSelectListener = listener;
     }
@@ -167,8 +183,9 @@ public class FileRecyclerAdapter extends RecyclerView.Adapter<FileRecyclerAdapte
             mPosition = position;
             mFileItemBean = fileItemBean;
             File file = fileItemBean.file;
+            String fileName = fileItemBean.name;
 
-            binding.name.setText(fileItemBean.name);
+            binding.name.setText(fileName);
 
             int infoLayoutVisible = View.GONE;
             if (fileItemBean.date != null) {
@@ -198,6 +215,22 @@ public class FileRecyclerAdapter extends RecyclerView.Adapter<FileRecyclerAdapte
                 binding.check.setChecked(selectedFiles.contains(fileItemBean));
             } else {
                 binding.check.setVisibility(View.GONE);
+            }
+
+            boolean isModFile = modToggleMode && file != null && file.isFile()
+                    && (fileName.endsWith(ModUtils.JAR_FILE_SUFFIX) || fileName.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX));
+            if (isModFile && !isMultiSelectMode) {
+                boolean enabled = fileName.endsWith(ModUtils.JAR_FILE_SUFFIX);
+                binding.modSwitch.setChecked(enabled);
+                binding.modSwitch.setVisibility(View.VISIBLE);
+                binding.modSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (onModToggleListener != null && file != null) {
+                        onModToggleListener.onModToggle(file, isChecked);
+                    }
+                });
+            } else {
+                binding.modSwitch.setOnCheckedChangeListener(null);
+                binding.modSwitch.setVisibility(View.GONE);
             }
 
             if (file != null && file.isFile() && ImageUtils.isImage(file)) {

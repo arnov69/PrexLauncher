@@ -10,61 +10,79 @@
     <ImageButton
         android:id="@+id/refresh_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/generic_refresh"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_refresh" />
+        android:src="@drawable/ic_refresh"
+        android:tint="@color/icon_color" />
 
     <ImageButton
         android:id="@+id/search_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/generic_search"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_search" />
+        android:src="@drawable/ic_search"
+        android:tint="@color/icon_color" />
 
     <ImageButton
         android:id="@+id/paste_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/generic_paste"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_paste" />
+        android:src="@drawable/ic_paste"
+        android:tint="@color/icon_color" />
 
     <ImageButton
         android:id="@+id/add_file_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/file_add_file"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_add_new" />
+        android:src="@drawable/ic_add_new"
+        android:tint="@color/icon_color" />
 
     <ImageButton
         android:id="@+id/create_folder_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/file_create_folder"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_add" />
+        android:src="@drawable/ic_add"
+        android:tint="@color/icon_color" />
 
     <ImageButton
         android:id="@+id/return_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:layout_weight="1"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginHorizontal="@dimen/_2sdp"
+        android:background="@drawable/bg_stat_icon"
         android:contentDescription="@string/generic_return"
+        android:padding="@dimen/_8sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_close" />
+        android:src="@drawable/ic_close"
+        android:tint="@color/accent_danger" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

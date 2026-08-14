@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:padding="@dimen/_8sdp"
-                android:background="@drawable/background_card"
+                android:background="@drawable/bg_stat_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -43,6 +43,7 @@
                     android:layout_height="@dimen/_24sdp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_download"
+                    app:tint="@color/accent_primary"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -52,6 +53,8 @@
                     android:layout_toEndOf="@id/install_icon"
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
                     android:text="@string/version_install_new" />
 
             </com.prexlauncher.ui.layout.AnimRelativeLayout>
@@ -101,14 +104,16 @@
 
                 <ImageView
                     android:id="@+id/favorites_actions"
-                    android:layout_width="@dimen/_24sdp"
-                    android:layout_height="@dimen/_24sdp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:scaleType="centerCrop"
-                    android:scaleX="0.92"
-                    android:scaleY="0.92"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/bg_stat_icon"
+                    android:padding="@dimen/_4sdp"
+                    android:scaleType="centerInside"
+                    android:scaleX="0.9"
+                    android:scaleY="0.9"
                     android:src="@drawable/ic_more"
+                    app:tint="@color/text_secondary"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -135,10 +140,12 @@
                 android:id="@+id/title_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:text="@string/version_manager_title"
                 android:textColor="@color/primary_text"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

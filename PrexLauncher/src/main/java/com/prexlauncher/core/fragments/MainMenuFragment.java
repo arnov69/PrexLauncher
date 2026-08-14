@@ -19,15 +19,18 @@ import com.prexlauncher.databinding.FragmentLauncherBinding;
 import com.prexlauncher.event.single.AccountUpdateEvent;
 import com.prexlauncher.event.single.LaunchGameEvent;
 import com.prexlauncher.event.single.RefreshVersionsEvent;
+import com.prexlauncher.feature.mod.ModUtils;
 import com.prexlauncher.feature.version.Version;
 import com.prexlauncher.feature.version.utils.VersionIconUtils;
 import com.prexlauncher.feature.version.VersionInfo;
 import com.prexlauncher.feature.version.VersionsManager;
+import com.prexlauncher.setting.AllSettings;
 import com.prexlauncher.task.TaskExecutors;
 import com.prexlauncher.ui.fragment.AboutFragment;
 import com.prexlauncher.ui.fragment.ControlButtonFragment;
 import com.prexlauncher.ui.fragment.FilesFragment;
 import com.prexlauncher.ui.fragment.FragmentWithAnim;
+import com.prexlauncher.ui.fragment.ModsFragment;
 import com.prexlauncher.ui.fragment.VersionManagerFragment;
 import com.prexlauncher.ui.fragment.VersionsListFragment;
 import com.prexlauncher.ui.subassembly.account.AccountViewWrapper;
@@ -41,6 +44,8 @@ import com.prexlauncher.core.progresskeeper.ProgressKeeper;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
 
 public class MainMenuFragment extends FragmentWithAnim {
     public static final String TAG = "MainMenuFragment";
@@ -77,6 +82,10 @@ public class MainMenuFragment extends FragmentWithAnim {
         });
         binding.shareLogsButton.setOnClickListener(v -> ZHTools.shareLogs(requireActivity()));
 
+        binding.modsShortcut.setOnClickListener(v -> openModsSection());
+        binding.resourcesShortcut.setOnClickListener(v -> openFilesSection("resourcepacks"));
+        binding.shadersShortcut.setOnClickListener(v -> openFilesSection("shaderpacks"));
+
         binding.version.setOnClickListener(v -> {
             if (!isTaskRunning()) {
                 ZHTools.swapFragmentWithAnim(this, VersionsListFragment.class, VersionsListFragment.TAG, null);
@@ -101,6 +110,62 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.versionInfo.setSelected(true);
 
         refreshCurrentVersion();
+        refreshStats();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshStats();
+    }
+
+    private void refreshStats() {
+        Version version = VersionsManager.INSTANCE.getCurrentVersion();
+        File gameDir = version != null ? version.getGameDir() : new File(PathManager.DIR_GAME_HOME);
+        File modsDir = new File(gameDir, "mods");
+        int mods = 0;
+        int enabled = 0;
+        File[] modFiles = modsDir.listFiles();
+        if (modFiles != null) {
+            for (File file : modFiles) {
+                String name = file.getName();
+                if (name.endsWith(ModUtils.JAR_FILE_SUFFIX)) {
+                    mods++;
+                    enabled++;
+                } else if (name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX)) {
+                    mods++;
+                }
+            }
+        }
+        binding.statsModsValue.setText(String.valueOf(mods));
+        binding.statsEnabledValue.setText(String.valueOf(enabled));
+        binding.statsRamValue.setText(AllSettings.getRamAllocation().getValue().getValue() + " MB");
+        binding.statsVersionsValue.setText(String.valueOf(VersionsManager.INSTANCE.getVersions().size()));
+    }
+
+    private void openModsSection() {
+        Bundle bundle = new Bundle();
+        File modsDir = new File(getCurrentGameDir(), "mods");
+        if (!modsDir.exists()) modsDir.mkdirs();
+        bundle.putString(ModsFragment.BUNDLE_ROOT_PATH, modsDir.getAbsolutePath());
+        ZHTools.swapFragmentWithAnim(this, ModsFragment.class, ModsFragment.TAG, bundle);
+    }
+
+    private void openFilesSection(String subDir) {
+        Bundle bundle = new Bundle();
+        File dir = new File(getCurrentGameDir(), subDir);
+        if (!dir.exists()) dir.mkdirs();
+        bundle.putString(FilesFragment.BUNDLE_LIST_PATH, dir.getAbsolutePath());
+        ZHTools.swapFragmentWithAnim(this, FilesFragment.class, FilesFragment.TAG, bundle);
+    }
+
+    private File getCurrentGameDir() {
+        Version version = VersionsManager.INSTANCE.getCurrentVersion();
+        if (version != null) {
+            File gameDir = version.getGameDir();
+            if (gameDir != null) return gameDir;
+        }
+        return new File(PathManager.DIR_GAME_HOME);
     }
 
     private void refreshCurrentVersion() {
@@ -128,7 +193,10 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Subscribe()
     public void event(RefreshVersionsEvent event) {
         if (event.getMode() == END) {
-            TaskExecutors.runInUIThread(this::refreshCurrentVersion);
+            TaskExecutors.runInUIThread(() -> {
+                refreshCurrentVersion();
+                refreshStats();
+            });
         }
     }
 

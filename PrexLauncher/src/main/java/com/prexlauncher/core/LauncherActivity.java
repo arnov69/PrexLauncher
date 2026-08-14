@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -75,7 +77,10 @@ import com.prexlauncher.ui.fragment.AccountFragment;
 import com.prexlauncher.ui.fragment.BaseFragment;
 import com.prexlauncher.ui.fragment.DownloadFragment;
 import com.prexlauncher.ui.fragment.DownloadModFragment;
+import com.prexlauncher.ui.fragment.FilesFragment;
+import com.prexlauncher.ui.fragment.ModsFragment;
 import com.prexlauncher.ui.fragment.SettingsFragment;
+import com.prexlauncher.ui.fragment.VersionsListFragment;
 import com.prexlauncher.ui.subassembly.settingsbutton.ButtonType;
 import com.prexlauncher.ui.subassembly.settingsbutton.SettingsButtonWrapper;
 import com.prexlauncher.ui.subassembly.view.DraggableViewWrapper;
@@ -84,6 +89,7 @@ import com.prexlauncher.utils.ZHTools;
 import com.prexlauncher.utils.anim.ViewAnimUtils;
 import com.prexlauncher.utils.file.FileTools;
 import com.prexlauncher.utils.image.ImageUtils;
+import com.prexlauncher.utils.path.PathManager;
 import com.prexlauncher.utils.stringutils.ShiftDirection;
 import com.prexlauncher.utils.stringutils.StringUtils;
 
@@ -129,6 +135,7 @@ public class LauncherActivity extends BaseActivity {
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
         @Override
         public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+            updateNavHighlight(f);
             if (f instanceof MainMenuFragment) {
                 mSettingsButtonWrapper.setButtonType(ButtonType.SETTINGS);
             } else {
@@ -440,6 +447,7 @@ public class LauncherActivity extends BaseActivity {
             }
         });
         binding.appTitleText.setText(InfoDistributor.APP_NAME);
+        binding.sidebarAppTitle.setText(InfoDistributor.APP_NAME);
         binding.appTitleText.setOnClickListener(v -> {
             String shiftedString = StringUtils.shiftString(binding.appTitleText.getText().toString(), ShiftDirection.RIGHT, 1);
             if (new Random().nextInt(100) < 20 && shiftedString.equals(InfoDistributor.APP_NAME)) {
@@ -455,6 +463,8 @@ public class LauncherActivity extends BaseActivity {
         binding.progressLayout.observe(ProgressLayout.LOGIN_ACCOUNT);
         binding.progressLayout.observe(ProgressLayout.DOWNLOAD_VERSION_LIST);
         binding.progressLayout.observe(ProgressLayout.CHECKING_MODS);
+
+        setupNavigation();
 
         binding.noticeGotButton.setOnClickListener(v -> {
             setNotice(false);
@@ -485,6 +495,108 @@ public class LauncherActivity extends BaseActivity {
         //愚人节彩蛋
         if (ZHTools.checkDate(4, 1)) binding.hair.setVisibility(View.VISIBLE);
         else binding.hair.setVisibility(View.GONE);
+    }
+
+    private void setupNavigation() {
+        setNavClickListener(binding.navHome, () -> switchSection(MainMenuFragment.class, MainMenuFragment.TAG, null));
+        setNavClickListener(binding.navVersions, () -> switchSection(VersionsListFragment.class, VersionsListFragment.TAG, null));
+        setNavClickListener(binding.navMods, () -> switchSection(ModsFragment.class, ModsFragment.TAG, createModsBundle()));
+        setNavClickListener(binding.navResources, () -> switchSection(FilesFragment.class, FilesFragment.TAG, createFilesBundle("resourcepacks")));
+        setNavClickListener(binding.navShaders, () -> switchSection(FilesFragment.class, FilesFragment.TAG, createFilesBundle("shaderpacks")));
+        setNavClickListener(binding.navSettings, () -> switchSection(SettingsFragment.class, SettingsFragment.TAG, null));
+        setNavClickListener(binding.navDownload, () -> {
+            Fragment fragment = getCurrentFragment();
+            if (fragment != null && !(fragment instanceof DownloadFragment || fragment instanceof DownloadModFragment)) {
+                switchSection(DownloadFragment.class, DownloadFragment.TAG, null);
+            }
+        });
+        updateNavHighlight(getCurrentFragment());
+    }
+
+    private void setNavClickListener(View navItem, Runnable action) {
+        navItem.setOnClickListener(v -> {
+            ViewAnimUtils.setViewAnim(navItem, Animations.Pulse);
+            action.run();
+        });
+    }
+
+    private void switchSection(Class<? extends Fragment> fragmentClass, String tag, Bundle bundle) {
+        Fragment currentFragment = getCurrentFragment();
+        if (currentFragment != null && currentFragment.getClass() == fragmentClass) {
+            updateNavHighlight(currentFragment);
+            return;
+        }
+
+        if (fragmentClass == MainMenuFragment.class) {
+            Tools.backToMainMenu(this);
+        } else if (currentFragment instanceof MainMenuFragment) {
+            ZHTools.swapFragmentWithAnim(currentFragment, fragmentClass, tag, bundle);
+        } else {
+            // When navigating between sections, collapse the fragment stack back to the root menu first.
+            getSupportFragmentManager().popBackStackImmediate(MainMenuFragment.TAG, 0);
+            Fragment mainMenuFragment = getSupportFragmentManager().findFragmentByTag(MainMenuFragment.TAG);
+            if (mainMenuFragment != null) {
+                ZHTools.swapFragmentWithAnim(mainMenuFragment, fragmentClass, tag, bundle);
+            }
+        }
+        updateNavHighlight(getCurrentFragment());
+    }
+
+    private Bundle createModsBundle() {
+        Bundle bundle = new Bundle();
+        File modsDir = new File(getCurrentGameDir(), "mods");
+        if (!modsDir.exists()) modsDir.mkdirs();
+        bundle.putString(ModsFragment.BUNDLE_ROOT_PATH, modsDir.getAbsolutePath());
+        return bundle;
+    }
+
+    private Bundle createFilesBundle(String subDir) {
+        Bundle bundle = new Bundle();
+        File dir = new File(getCurrentGameDir(), subDir);
+        if (!dir.exists()) dir.mkdirs();
+        bundle.putString(FilesFragment.BUNDLE_LIST_PATH, dir.getAbsolutePath());
+        return bundle;
+    }
+
+    private File getCurrentGameDir() {
+        Version version = VersionsManager.INSTANCE.getCurrentVersion();
+        if (version != null) {
+            File gameDir = version.getGameDir();
+            if (gameDir != null) return gameDir;
+        }
+        return new File(PathManager.DIR_GAME_HOME);
+    }
+
+    private void updateNavHighlight(Fragment fragment) {
+        if (fragment == null) return;
+        int navId = 0;
+        if (fragment instanceof MainMenuFragment) navId = R.id.nav_home;
+        else if (fragment instanceof VersionsListFragment) navId = R.id.nav_versions;
+        else if (fragment instanceof ModsFragment) navId = R.id.nav_mods;
+        else if (fragment instanceof SettingsFragment) navId = R.id.nav_settings;
+        else if (fragment instanceof DownloadFragment) navId = R.id.nav_download;
+        else if (fragment instanceof FilesFragment) {
+            Bundle args = fragment.getArguments();
+            if (args != null) {
+                String path = args.getString(FilesFragment.BUNDLE_LIST_PATH, "");
+                if (path.contains("shaderpacks")) navId = R.id.nav_shaders;
+                else if (path.contains("resourcepacks")) navId = R.id.nav_resources;
+            }
+        }
+        if (navId == 0) return;
+
+        applyNavState(binding.navHome, binding.navHomeIcon, navId == R.id.nav_home);
+        applyNavState(binding.navVersions, binding.navVersionsIcon, navId == R.id.nav_versions);
+        applyNavState(binding.navMods, binding.navModsIcon, navId == R.id.nav_mods);
+        applyNavState(binding.navResources, binding.navResourcesIcon, navId == R.id.nav_resources);
+        applyNavState(binding.navShaders, binding.navShadersIcon, navId == R.id.nav_shaders);
+        applyNavState(binding.navSettings, binding.navSettingsIcon, navId == R.id.nav_settings);
+        applyNavState(binding.navDownload, binding.navDownloadIcon, navId == R.id.nav_download);
+    }
+
+    private void applyNavState(View item, ImageView icon, boolean selected) {
+        item.setSelected(selected);
+        icon.setColorFilter(ContextCompat.getColor(this, selected ? R.color.accent_primary : R.color.nav_icon_tint));
     }
 
     @Override
