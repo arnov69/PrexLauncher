@@ -386,6 +386,10 @@
     <string name="search_case_sensitive">Case sensitive</string>
     <string name="search_only_show_results">Show only search results</string>
     <string name="search_count">%d search results</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_subtitle">PrexLauncher</string>
+    <string name="log_launching_game">Launching game…</string>
+
     <!-- Main Page & Settings -->
     <string name="main_open_main_dir">Open main directory</string>
     <string name="main_install_jar_file">Execute .jar file</string>
@@ -408,6 +412,7 @@
     <string name="setting_category_experimental_patches">Experimental Patches</string>
     <string name="setting_category_support">External Support</string>
     <string name="setting_renderer_title">Renderer</string>
+    <string name="setting_renderer_auto">Auto (Recommended)</string>
     <string name="setting_renderer_from_plugins">From %s Plugin</string>
     <string name="setting_renderer_local_import_title">Local Renderer Import</string>
     <string name="setting_renderer_local_import_desc">In addition to installing software-rendering plugins, the launcher also supports importing renderer plugins locally. However, some devices may not be able to use local renderer plugins, so use with caution!</string>
@@ -707,6 +712,7 @@
 
     <!-- Home dashboard -->
     <string name="home_welcome">Welcome back</string>
+    <string name="home_welcome_subtitle">PrexLauncher</string>
     <string name="home_stat_ram">RAM</string>
     <string name="home_stat_mods">Mods</string>
     <string name="home_stat_enabled">Enabled</string>

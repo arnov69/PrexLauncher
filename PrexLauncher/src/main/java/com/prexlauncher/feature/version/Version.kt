@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.prexlauncher.feature.customprofilepath.ProfilePathHome
 import com.prexlauncher.feature.mod.parser.ModChecker
+import com.prexlauncher.renderer.Renderers
 import com.prexlauncher.setting.AllSettings
 import com.prexlauncher.utils.ZHTools
 import com.prexlauncher.utils.path.PathManager
@@ -75,7 +76,22 @@ class Version(
 
     private fun String.getValueOrDefault(default: String): String = this.takeIf { it.isNotEmpty() } ?: default
 
-    fun getRenderer(): String = versionConfig.getRenderer().getValueOrDefault(AllSettings.renderer.getValue())
+    /**
+     * Resolve the renderer to use for this version:
+     * 1. explicit per-version choice (manual override), if set
+     * 2. explicit global choice, if set
+     * 3. automatic recommendation based on the Minecraft version
+     */
+    fun getRenderer(): String {
+        val perVersion = versionConfig.getRenderer()
+        if (perVersion.isNotEmpty()) return perVersion
+        val global = AllSettings.renderer.getValue()
+        if (global.isNotEmpty() && global != Renderers.LEGACY_DEFAULT_RENDERER) return global
+        // Modpack folders like "Fabulously Optimized" don't carry the MC version in their
+        // name — pass the real version info (e.g. "26.2, Fabric - 0.19.3") too.
+        val extraInfo = getVersionInfo()?.getInfoString().orEmpty()
+        return Renderers.getRecommendedRendererIdentifier(getVersionName(), extraInfo)
+    }
 
     fun getDriver(): String = versionConfig.getDriver().getValueOrDefault(AllSettings.driver.getValue())
 

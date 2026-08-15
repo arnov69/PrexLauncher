@@ -14,7 +14,9 @@ class AllSettings {
     companion object {
         // Video
         @JvmStatic
-        val renderer = StringSettingUnit("renderer", "opengles2")
+        // Empty = automatic: each Minecraft version picks its own recommended
+        // renderer (e.g. MobileGlues for 1.21+, GL4ES for older versions).
+        val renderer = StringSettingUnit("renderer", "")
 
         @JvmStatic
         val driver = StringSettingUnit("driver", "Turnip")

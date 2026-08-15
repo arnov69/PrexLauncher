@@ -4,6 +4,8 @@ import android.content.Context
 import com.prexlauncher.feature.log.Logging
 import com.prexlauncher.renderer.renderers.FreedrenoRenderer
 import com.prexlauncher.renderer.renderers.GL4ESRenderer
+import com.prexlauncher.renderer.renderers.KryptonRenderer
+import com.prexlauncher.renderer.renderers.MobileGluesRenderer
 import com.prexlauncher.renderer.renderers.PanfrostRenderer
 import com.prexlauncher.renderer.renderers.VirGLRenderer
 import com.prexlauncher.renderer.renderers.VulkanZinkRenderer
@@ -31,6 +33,8 @@ object Renderers {
 
         addRenderers(
             GL4ESRenderer(),
+            MobileGluesRenderer(),
+            KryptonRenderer(),
             VulkanZinkRenderer(),
             VirGLRenderer(),
             FreedrenoRenderer(),
@@ -121,4 +125,45 @@ object Renderers {
      * 当前是否设置了渲染器
      */
     fun isCurrentRendererValid(): Boolean = isInitialized && this.currentRenderer != null
+
+    /**
+     * 全局渲染器设置的旧出厂默认值 ("opengles2")。它从未匹配过任何渲染器的唯一标识符，
+     * 因此当全局设置仍停留在该值时，视为“自动”模式：按 Minecraft 版本自动选择渲染器。
+     */
+    @JvmField
+    val LEGACY_DEFAULT_RENDERER: String = "opengles2"
+
+    private val YEAR_VERSION_REGEX = Regex("""\b(2\d)\.\d+""")
+    private val OLD_VERSION_REGEX = Regex("""\b1\.(\d+)(\.\d+)?""")
+    private val SNAPSHOT_REGEX = Regex("""\b\d{2}w\d{2}[a-z]""")
+
+    /**
+     * 按版本号判断是否需要现代 OpenGL 渲染器 (MobileGlues)：
+     * - 1.21+、26.x 年号版本、现代快照 (2XwXXx) → MobileGlues (opengles3)
+     * - 1.20 及更早版本 → GL4ES (opengles2)
+     */
+    @JvmStatic
+    fun isModernVersion(versionName: String): Boolean {
+        val name = versionName.lowercase()
+        if (SNAPSHOT_REGEX.containsMatchIn(name)) return true
+        if (YEAR_VERSION_REGEX.containsMatchIn(name)) return true
+        OLD_VERSION_REGEX.find(name)?.let { m ->
+            val minor = m.groupValues[1].toIntOrNull()
+            return minor != null && minor >= 21
+        }
+        return false
+    }
+
+    /**
+     * @return 该版本应自动使用的推荐渲染器唯一标识符
+     * @param extraInfo 版本的真实 Minecraft 版本信息（例如模组包 "Fabulously Optimized" 的名称中
+     * 不含版本号，需要靠 "26.2, Fabric - 0.19.3" 这类信息来判断）
+     */
+    @JvmStatic
+    fun getRecommendedRendererIdentifier(versionName: String, extraInfo: String = ""): String {
+        val combined = if (extraInfo.isBlank()) versionName else "$versionName $extraInfo"
+        val targetId = if (isModernVersion(combined)) "opengles3" else "opengles2"
+        val renderer = renderers.firstOrNull { it.getRendererId() == targetId }
+        return renderer?.getUniqueIdentifier() ?: targetId
+    }
 }

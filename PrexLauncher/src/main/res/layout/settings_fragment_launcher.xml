@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:ignore="UseSwitchCompatOrMaterialXml"
+    android:background="@color/settings_bg"
+    android:theme="@style/ThemePrexSettings">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:id="@+id/download_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_download"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/checkLibraries_layout"
@@ -43,7 +45,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/checkLibraries"
                     android:text="@string/setting_check_libraries_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/checkLibraries_summary"
@@ -79,7 +81,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/verifyManifest"
                     android:text="@string/setting_verify_manifest_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/verifyManifest_summary"
@@ -115,7 +117,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/resourceImageCache"
                     android:text="@string/setting_resource_image_cache_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/resourceImageCache_summary"
@@ -150,7 +152,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/addFullResourceName"
                     android:text="@string/setting_resource_full_name_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/addFullResourceName_summary"
@@ -185,7 +187,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_download_source_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/downloadSource_summary"
@@ -221,7 +223,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_max_download_threads_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/maxDownloadThreads_summary"
@@ -262,7 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -272,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_personalization"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/launcherTheme_layout"
@@ -288,7 +290,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_launcher_theme"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/launcherTheme_value"
@@ -314,7 +316,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/custom_background_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/custom_background_summary"
@@ -341,7 +343,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/animation"
                     android:text="@string/setting_animation_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/animation_summary"
@@ -377,7 +379,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_animation_speed_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/animationSpeed_summary"
@@ -426,7 +428,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_page_opacity_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/pageOpacity_summary"
@@ -467,7 +469,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -477,7 +479,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_launcher"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/enableLogOutput_layout"
@@ -494,7 +496,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableLogOutput"
                     android:text="@string/setting_enable_log_output_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/enableLogOutput_summary"
@@ -529,7 +531,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/quitLauncher"
                     android:text="@string/setting_quit_launcher_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/quitLauncher_summary"
@@ -564,7 +566,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/clear_up_cache"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/clean_up_cache_summary"
@@ -590,7 +592,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/update"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/check_update_summary"
@@ -617,7 +619,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/acceptPreReleaseUpdates"
                     android:text="@string/setting_accept_pre_release_updates_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/acceptPreReleaseUpdates_summary"
@@ -653,7 +655,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/notification_permission_request"
                     android:text="@string/setting_ask_for_notification_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/notification_permission_request_summary"

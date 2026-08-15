@@ -324,6 +324,14 @@ class VersionsListFragment : FragmentWithAnim(R.layout.fragment_versions_list) {
         EventBus.getDefault().register(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Reload the list whenever the screen becomes visible again, so freshly
+        // installed versions show up without needing a manual refresh (the version
+        // cache is refreshed by the installer before the user returns here).
+        if (::binding.isInitialized) refreshVersions()
+    }
+
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)

@@ -918,6 +918,40 @@ public class GLFW
         height.put(mGLFWWindowHeight);
     }
 
+    @Nullable
+    @NativeType("const char *")
+    public static String glfwGetMonitorName(@NativeType("GLFWmonitor *") long monitor) {
+        // Newer Minecraft versions (26.x+) query the monitor name during startup.
+        return "Monitor";
+    }
+
+    public static void glfwSetPreeditCursorRectangle(@NativeType("GLFWwindow *") long window, int x, int y, int width, int height) {
+        // No-op: preedit cursor positioning is handled by the launcher's own IME.
+    }
+
+    public static boolean glfwVulkanSupported() {
+        return false;
+    }
+
+    public static boolean glfwGetPhysicalDevicePresentationSupport(@NativeType("VkInstance") long instance, @NativeType("VkPhysicalDevice") long device, @NativeType("uint32_t") int queuefamily) {
+        return false;
+    }
+
+    @Nullable
+    @NativeType("const char **")
+    public static PointerBuffer glfwGetRequiredInstanceExtensions() {
+        return null;
+    }
+
+    public static int glfwCreateWindowSurface(@NativeType("VkInstance") long instance, @NativeType("GLFWwindow *") long window, @Nullable @NativeType("const VkAllocationCallbacks *") PointerBuffer allocator, @NativeType("VkSurfaceKHR *") LongBuffer surface) {
+        return GLFW_API_UNAVAILABLE;
+    }
+
+    @NativeType("GLFWwindow *")
+    public static long glfwGetCocoaWindow(@NativeType("GLFWwindow *") long window) {
+        return window;
+    }
+
     @NativeType("GLFWmonitor *")
     public static long glfwGetWindowMonitor(@NativeType("GLFWwindow *") long window) {
         return mGLFWWindowMonitor;

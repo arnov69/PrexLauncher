@@ -10,6 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <!-- Sidebar / content divider line -->
+    <View
+        android:id="@+id/sidebar_divider"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_sidebar_divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sidebar_layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Left navigation rail -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/sidebar_layout"
@@ -35,8 +45,8 @@
             <ImageView
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_launcher" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/app_logo" />
 
             <TextView
                 android:id="@+id/sidebar_app_title"

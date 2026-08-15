@@ -19,6 +19,7 @@ import com.prexlauncher.databinding.FragmentLauncherBinding;
 import com.prexlauncher.event.single.AccountUpdateEvent;
 import com.prexlauncher.event.single.LaunchGameEvent;
 import com.prexlauncher.event.single.RefreshVersionsEvent;
+import com.prexlauncher.feature.accounts.AccountsManager;
 import com.prexlauncher.feature.mod.ModUtils;
 import com.prexlauncher.feature.version.Version;
 import com.prexlauncher.feature.version.utils.VersionIconUtils;
@@ -68,6 +69,7 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.aboutText.setText(InfoCenter.replaceName(requireActivity(), R.string.about_tab));
+        refreshWelcomeSubtitle();
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
         binding.openMainDirButton.setOnClickListener(v -> {
@@ -203,6 +205,14 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(AccountUpdateEvent event) {
         if (accountViewWrapper != null) accountViewWrapper.refreshAccountInfo();
+        refreshWelcomeSubtitle();
+    }
+
+    private void refreshWelcomeSubtitle() {
+        if (binding.welcomeUserText == null) return;
+        String playerName = AccountsManager.INSTANCE.getCurrentAccount() != null ? AccountsManager.INSTANCE.getCurrentAccount().username : null;
+        binding.welcomeUserText.setText(
+                (playerName == null || playerName.isEmpty()) ? getString(R.string.home_welcome_subtitle) : playerName);
     }
 
     @Override

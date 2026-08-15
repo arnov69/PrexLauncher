@@ -49,7 +49,7 @@ abstract class AbstractResourceDownloadFragment(
     private val classify: Classify,
     private val categoryList: List<Category>,
     private val showModloader: Boolean,
-    private val recommendedPlatform: Platform = Platform.CURSEFORGE
+    private val recommendedPlatform: Platform = Platform.MODRINTH
 ) : FragmentWithAnim(R.layout.fragment_download_resource) {
     private lateinit var binding: FragmentDownloadResourceBinding
 
@@ -57,7 +57,7 @@ abstract class AbstractResourceDownloadFragment(
     private lateinit var mSortAdapter: ObjectSpinnerAdapter<Sort>
     private lateinit var mCategoryAdapter: ObjectSpinnerAdapter<Category>
     private lateinit var mModLoaderAdapter: ObjectSpinnerAdapter<ModLoader>
-    private var mCurrentPlatform: Platform = Platform.CURSEFORGE
+    private var mCurrentPlatform: Platform = Platform.MODRINTH
     private val mFilters: Filters = Filters()
 
     private val mInfoAdapter = InfoAdapter(parentFragment,

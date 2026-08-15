@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:ignore="UseSwitchCompatOrMaterialXml"
+    android:background="@color/settings_bg"
+    android:theme="@style/ThemePrexSettings">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:id="@+id/version_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_version"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/version_isolation_layout"
@@ -43,7 +45,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/version_isolation"
                     android:text="@string/setting_version_isolation_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/version_isolation_summary"
@@ -77,7 +79,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_version_custom_info_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/versionCustomInfo_summary"
@@ -105,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_language"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/autoSetGameLanguage_layout"
@@ -132,7 +134,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/autoSetGameLanguage"
                     android:text="@string/setting_set_game_language_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/autoSetGameLanguage_summary"
@@ -168,7 +170,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gameLanguageOverridden"
                     android:text="@string/setting_set_game_language_overridden_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameLanguageOverridden_summary"
@@ -202,7 +204,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_set_game_language_list"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/setGameLanguage_value"
@@ -221,7 +223,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -231,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_java_tweaks"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/install_jre_layout"
@@ -247,7 +249,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_java_multirt_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/install_jre_summary"
@@ -273,7 +275,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_java_select_runtime_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/selectRuntimeMode_summary"
@@ -308,7 +310,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_java_args_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/javaArgs_summary"
@@ -344,7 +346,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_java_memory_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/allocation_summary"
@@ -401,7 +403,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/java_sandbox"
                     android:text="@string/setting_java_sandbox_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/java_sandbox_summary"
@@ -428,7 +430,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -438,7 +440,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_game_menu"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/gameMenuShowMemory_layout"
@@ -455,7 +457,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gameMenuShowMemory"
                     android:text="@string/setting_game_menu_show_memory_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuShowMemory_summary"
@@ -490,7 +492,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gameMenuShowFPS"
                     android:text="@string/setting_game_menu_show_fps_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuShowFPS_summary"
@@ -524,7 +526,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_game_menu_memory_text_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuMemoryText_summary"
@@ -559,7 +561,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_game_menu_location_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuLocation_value"
@@ -586,7 +588,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_game_menu_info_refresh_rate_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuInfoRefreshRate_summary"
@@ -635,7 +637,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_game_menu_alpha_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gameMenuAlpha_summary"

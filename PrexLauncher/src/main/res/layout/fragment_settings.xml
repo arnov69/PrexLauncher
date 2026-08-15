@@ -4,209 +4,240 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/settings_bg"
     tools:context="com.prexlauncher.ui.fragment.SettingsFragment">
+
+    <!-- Header: logo + title -->
+    <LinearLayout
+        android:id="@+id/settings_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_18sdp"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_18sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/settings_logo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:contentDescription="@string/settings_subtitle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/app_logo_tile" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/settings_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_title"
+                android:textColor="@color/settings_text_primary"
+                android:textSize="@dimen/_19ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/settings_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_subtitle"
+                android:textColor="@color/settings_text_secondary"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Category chips -->
+    <HorizontalScrollView
+        android:id="@+id/settings_chip_scroll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_header">
+
+        <LinearLayout
+            android:id="@+id/settings_chip_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_14sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_14sdp"
+            android:paddingBottom="@dimen/_6sdp">
+
+            <LinearLayout
+                android:id="@+id/chip_video"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:background="@drawable/bg_settings_chip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_14sdp"
+                android:paddingEnd="@dimen/_14sdp">
+
+                <ImageView
+                    android:id="@+id/chip_video_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:contentDescription="@string/setting_category_video"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_setting_video" />
+
+                <TextView
+                    android:id="@+id/chip_video_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/setting_category_video"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_control"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/bg_settings_chip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_14sdp"
+                android:paddingEnd="@dimen/_14sdp">
+
+                <ImageView
+                    android:id="@+id/chip_control_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:contentDescription="@string/setting_category_control"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_menu_custom_controls" />
+
+                <TextView
+                    android:id="@+id/chip_control_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/setting_category_control"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_game"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/bg_settings_chip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_14sdp"
+                android:paddingEnd="@dimen/_14sdp">
+
+                <ImageView
+                    android:id="@+id/chip_game_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:contentDescription="@string/setting_category_game"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_setting_game" />
+
+                <TextView
+                    android:id="@+id/chip_game_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/setting_category_game"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/bg_settings_chip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_14sdp"
+                android:paddingEnd="@dimen/_14sdp">
+
+                <ImageView
+                    android:id="@+id/chip_launcher_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:contentDescription="@string/setting_category_launcher"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_setting_launcher" />
+
+                <TextView
+                    android:id="@+id/chip_launcher_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/setting_category_launcher"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_experimental"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/bg_settings_chip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_14sdp"
+                android:paddingEnd="@dimen/_14sdp">
+
+                <ImageView
+                    android:id="@+id/chip_experimental_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:contentDescription="@string/setting_category_experimental"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_setting_experimental" />
+
+                <TextView
+                    android:id="@+id/chip_experimental_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/setting_category_experimental"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/settings_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/settings_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_chip_scroll" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/settings_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_minus4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settings_layout"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/shadowView"
-            android:layout_width="@dimen/_4sdp"
-            android:layout_height="0dp"
-            android:background="@drawable/shadow_gradient_left"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.angcyo.tablayout.DslTabLayout
-            android:id="@+id/settings_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/menu_overlay"
-            app:layout_constraintEnd_toStartOf="@+id/shadowView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tab_draw_indicator="true"
-            app:tab_indicator_enable_flow="true"
-            app:tab_indicator_drawable="@drawable/selector_bar_vertical"
-            app:tab_indicator_x_offset="@dimen/_6sdp"
-            app:tab_orientation="VERTICAL">
-
-            <com.prexlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/video_image"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="@drawable/bg_stat_icon"
-                    android:padding="@dimen/_5sdp"
-                    android:contentDescription="@string/setting_category_video"
-                    android:scaleType="fitCenter"
-                    android:scaleX="0.92"
-                    android:scaleY="0.92"
-                    app:srcCompat="@drawable/ic_setting_video" />
-
-                <TextView
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toEndOf="@+id/video_image"
-                    android:text="@string/setting_category_video"
-                    android:textColor="@color/black_or_white" />
-            </com.prexlauncher.ui.layout.AnimRelativeLayout>
-
-            <com.prexlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="@+id/video_settings"
-                app:layout_constraintTop_toBottomOf="@+id/video_settings">
-
-                <ImageView
-                    android:id="@+id/controls_image"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="@drawable/bg_stat_icon"
-                    android:padding="@dimen/_5sdp"
-                    android:contentDescription="@string/setting_category_control"
-                    android:scaleType="fitCenter"
-                    android:scaleX="0.92"
-                    android:scaleY="0.92"
-                    app:srcCompat="@drawable/ic_menu_custom_controls" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toEndOf="@+id/controls_image"
-                    android:text="@string/setting_category_control"
-                    android:textColor="@color/black_or_white" />
-            </com.prexlauncher.ui.layout.AnimRelativeLayout>
-
-            <com.prexlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="@+id/controls_settings"
-                app:layout_constraintTop_toBottomOf="@+id/controls_settings">
-
-                <ImageView
-                    android:id="@+id/game_image"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="@drawable/bg_stat_icon"
-                    android:padding="@dimen/_5sdp"
-                    android:contentDescription="@string/setting_category_launcher"
-                    android:scaleType="fitCenter"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    app:srcCompat="@drawable/ic_setting_game" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toEndOf="@+id/game_image"
-                    android:text="@string/setting_category_game"
-                    android:textColor="@color/black_or_white" />
-            </com.prexlauncher.ui.layout.AnimRelativeLayout>
-
-            <com.prexlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="@+id/game_settings"
-                app:layout_constraintTop_toBottomOf="@+id/game_settings">
-
-                <ImageView
-                    android:id="@+id/launcher_image"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="@drawable/bg_stat_icon"
-                    android:padding="@dimen/_5sdp"
-                    android:contentDescription="@string/setting_category_launcher"
-                    android:scaleType="fitCenter"
-                    android:scaleX="0.92"
-                    android:scaleY="0.92"
-                    app:srcCompat="@drawable/ic_setting_launcher" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toEndOf="@+id/launcher_image"
-                    android:text="@string/setting_category_launcher"
-                    android:textColor="@color/black_or_white" />
-            </com.prexlauncher.ui.layout.AnimRelativeLayout>
-
-            <com.prexlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintStart_toStartOf="@+id/launcher_settings"
-                app:layout_constraintTop_toBottomOf="@+id/launcher_settings">
-
-                <ImageView
-                    android:id="@+id/experimental_image"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:background="@drawable/bg_stat_icon"
-                    android:padding="@dimen/_5sdp"
-                    android:contentDescription="@string/setting_category_experimental"
-                    android:scaleType="fitCenter"
-                    android:scaleX="0.92"
-                    android:scaleY="0.92"
-                    app:srcCompat="@drawable/ic_setting_experimental" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toEndOf="@+id/experimental_image"
-                    android:text="@string/setting_category_experimental"
-                    android:textColor="@color/black_or_white" />
-            </com.prexlauncher.ui.layout.AnimRelativeLayout>
-
-        </com.angcyo.tablayout.DslTabLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/settings_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

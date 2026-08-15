@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:ignore="UseSwitchCompatOrMaterialXml"
+    android:background="@color/settings_bg"
+    android:theme="@style/ThemePrexSettings">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:id="@+id/experimental_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_experimental_patches"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/dump_shaders_layout"
@@ -43,7 +45,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/dump_shaders"
                     android:text="@string/setting_shader_dump_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/dump_shaders_summary"
@@ -78,7 +80,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/bigCoreAffinity"
                     android:text="@string/setting_force_big_core_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/bigCoreAffinity_summary"
@@ -105,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_support"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/tcVibrateDuration_layout"
@@ -132,7 +134,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_touch_controller_vibrate_duration_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/tcVibrateDuration_summary"

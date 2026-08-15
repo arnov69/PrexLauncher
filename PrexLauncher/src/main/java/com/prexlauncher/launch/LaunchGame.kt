@@ -120,9 +120,9 @@ class LaunchGame {
         @Throws(Throwable::class)
         @JvmStatic
         fun runGame(activity: AppCompatActivity, minecraftVersion: Version, version: JMinecraftVersionList.Version) {
-            if (!Renderers.isCurrentRendererValid()) {
-                Renderers.setCurrentRenderer(activity, AllSettings.renderer.getValue())
-            }
+            // Always resolve the renderer for the version being launched:
+            // per-version choice > global choice > automatic by Minecraft version.
+            Renderers.setCurrentRenderer(activity, minecraftVersion.getRenderer())
 
             var account = AccountsManager.currentAccount!!
             if (minecraftVersion.offlineAccountLogin) {

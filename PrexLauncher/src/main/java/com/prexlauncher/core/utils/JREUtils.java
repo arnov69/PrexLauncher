@@ -388,6 +388,14 @@ public final class JREUtils {
         //Add automatically generated args
         userArgs.add("-Xms" + AllSettings.getRamAllocation().getValue().getValue() + "M");
         userArgs.add("-Xmx" + AllSettings.getRamAllocation().getValue().getValue() + "M");
+
+        // Performance tuning: keep GC pauses short and off the render thread so frame
+        // times stay stable (more consistent FPS). All flags are safe on Java 8+.
+        userArgs.add("-XX:+UseG1GC");
+        userArgs.add("-XX:MaxGCPauseMillis=50");
+        userArgs.add("-XX:+ParallelRefProcEnabled");
+        userArgs.add("-XX:+UseStringDeduplication");
+
         if (Renderers.INSTANCE.isCurrentRendererValid()) userArgs.add("-Dorg.lwjgl.opengl.libname=" + loadGraphicsLibrary());
 
         // Force LWJGL to use the Freetype library intended for it, instead of using the one
@@ -415,7 +423,9 @@ public final class JREUtils {
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.appendToLog("Java Exit code: " + exitCode);
-        if (exitCode != 0) {
+        // -1 is a normal termination on Android (the user quit the game); only show
+        // the error screen for genuine failure exit codes.
+        if (exitCode != 0 && exitCode != -1) {
             ErrorActivity.showExitMessage(activity, exitCode, false);
         }
         EventBus.getDefault().post(new JvmExitEvent(exitCode));

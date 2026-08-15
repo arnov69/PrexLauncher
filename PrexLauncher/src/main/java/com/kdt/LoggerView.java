@@ -66,6 +66,21 @@ public class LoggerView extends ConstraintLayout {
     }
 
     /**
+     * 控制日志界面是否可以被用户关闭。
+     * 游戏启动期间调用 setCloseEnabled(false) 可锁定日志界面，
+     * 游戏启动完成后调用 setCloseEnabled(true) 恢复。
+     * @param enabled 是否允许用户关闭日志界面
+     */
+    public void setCloseEnabled(boolean enabled) {
+        binding.cancel.setEnabled(enabled);
+        binding.cancel.setAlpha(enabled ? 1f : 0.25f);
+        binding.toggleLog.setEnabled(enabled);
+        binding.toggleLog.setAlpha(enabled ? 1f : 0.4f);
+        binding.toggleAutoscroll.setEnabled(enabled);
+        binding.toggleAutoscroll.setAlpha(enabled ? 1f : 0.4f);
+    }
+
+    /**
      * Inflate the layout, and add component behaviors
      */
     private void init() {

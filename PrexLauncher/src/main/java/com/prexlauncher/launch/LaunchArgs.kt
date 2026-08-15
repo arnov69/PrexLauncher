@@ -32,6 +32,10 @@ class LaunchArgs(
 
         argsList.addAll(getJavaArgs())
         argsList.addAll(getMinecraftJVMArgs())
+        // The version JSON's -Djava.library.path=${natives_directory}/java overrides the launcher's
+        // path, but that folder does not contain the LWJGL .so files (they live in DIR_NATIVE_LIB).
+        // Adding java.library.path last ensures it wins and points at the real native library dir.
+        argsList.add("-Djava.library.path=${getNativeLibraryPath()}")
         argsList.add("-cp")
         argsList.add("${Tools.getLWJGL3ClassPath()}:$launchClassPath")
 
@@ -68,11 +72,20 @@ class LaunchArgs(
         val versionSpecificNativesDir = File(PathManager.DIR_CACHE, "natives/${minecraftVersion.getVersionName()}")
         if (versionSpecificNativesDir.exists()) {
             val dirPath = versionSpecificNativesDir.absolutePath
-            argsList.add("-Djava.library.path=$dirPath:${PathManager.DIR_NATIVE_LIB}")
             argsList.add("-Djna.boot.library.path=$dirPath")
         }
 
         return argsList
+    }
+
+    /**
+     * The writable per-version natives scratch directory followed by the APK's real native
+     * library directory (where the LWJGL .so files live).
+     */
+    private fun getNativeLibraryPath(): String {
+        val versionSpecificNativesDir = File(PathManager.DIR_CACHE, "natives/${minecraftVersion.getVersionName()}")
+        if (!versionSpecificNativesDir.isDirectory) versionSpecificNativesDir.mkdirs()
+        return "${versionSpecificNativesDir.absolutePath}:${PathManager.DIR_NATIVE_LIB}"
     }
 
     private fun getMinecraftJVMArgs(): Array<String> {
@@ -87,7 +100,13 @@ class LaunchArgs(
         varArgMap["classpath_separator"] = ":"
         varArgMap["library_directory"] = getLibrariesHome()
         varArgMap["version_name"] = versionInfo.id
-        varArgMap["natives_directory"] = PathManager.DIR_NATIVE_LIB
+        // Minecraft 26.x extracts native libraries into ${natives_directory}/lwjgl (and the
+        // jna/netty/java subfolders). The APK's nativeLibraryDir is read-only on modern Android,
+        // so point the template at a writable cache directory instead. The actual LWJGL .so files
+        // still load from DIR_NATIVE_LIB via the dlopen hook / LD_LIBRARY_PATH.
+        val nativesDirectory = File(PathManager.DIR_CACHE, "natives/${minecraftVersion.getVersionName()}")
+        if (!nativesDirectory.isDirectory) nativesDirectory.mkdirs()
+        varArgMap["natives_directory"] = nativesDirectory.absolutePath
 
         val minecraftArgs: MutableList<String> = java.util.ArrayList()
         versionInfo.arguments?.let {

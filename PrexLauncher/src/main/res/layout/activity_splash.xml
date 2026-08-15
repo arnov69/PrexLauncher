@@ -11,17 +11,29 @@
         android:background="@color/background_menu_top"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/splash_logo"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:contentDescription="@string/settings_subtitle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/app_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.prexlauncher.ui.view.AnimTextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
             android:background="?android:attr/selectableItemBackground"
             android:textColor="@color/menu_bar_text"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/splash_logo"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

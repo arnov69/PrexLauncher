@@ -12,6 +12,19 @@
         <item name="android:textSize">@dimen/_12ssp</item>
     </style>
 
+    <!-- Theme overlay applied to the redesigned dark settings pages -->
+    <style name="ThemePrexSettings" parent="@style/AppTheme">
+        <item name="android:textColor">@color/settings_text_primary</item>
+        <item name="android:textColorPrimary">@color/settings_text_primary</item>
+        <item name="android:textColorSecondary">@color/settings_text_secondary</item>
+        <item name="android:textColorHint">@color/settings_text_secondary</item>
+        <item name="android:colorAccent">@color/prex_accent</item>
+        <item name="colorAccent">@color/prex_accent</item>
+        <item name="android:colorControlActivated">@color/prex_accent</item>
+        <item name="android:colorControlHighlight">@color/settings_row_pressed</item>
+        <item name="android:windowBackground">@color/settings_bg</item>
+    </style>
+
     <style name="CustomDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowBackground">@drawable/dialog_background</item>
         <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>

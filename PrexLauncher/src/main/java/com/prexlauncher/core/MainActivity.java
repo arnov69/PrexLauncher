@@ -229,9 +229,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 BackgroundManager.clearBackgroundImage(binding.backgroundView);
                 Logging.i("Rendering Game", "The game rendering has started, " +
                         "and the background image has been cleared to prevent certain issues from occurring.");
+                // 游戏已启动：自动隐藏日志输出，并恢复关闭权限
+                binding.mainLoggerView.postDelayed(() -> {
+                    binding.mainLoggerView.setCloseEnabled(true);
+                    binding.mainLoggerView.setVisibilityWithAnim(false);
+                }, 1200);
             });
 
-            if (AllSettings.getEnableLogOutput().getValue()) binding.mainLoggerView.setVisibilityWithAnim(true);
+            // 启动游戏时自动展示日志输出，启动期间用户无法关闭日志界面
+            binding.mainLoggerView.setVisibilityWithAnim(true);
+            binding.mainLoggerView.setCloseEnabled(false);
 
             String mcInfo = "";
             VersionInfo versionInfo = minecraftVersion.getVersionInfo();

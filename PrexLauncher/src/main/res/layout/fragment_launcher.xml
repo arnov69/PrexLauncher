@@ -47,10 +47,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/welcome_user_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:text="@string/about_tab"
+                    android:text="@string/home_welcome_subtitle"
                     android:textColor="@color/text_secondary"
                     android:textSize="@dimen/_12ssp" />
 

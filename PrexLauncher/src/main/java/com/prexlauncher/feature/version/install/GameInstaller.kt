@@ -86,6 +86,10 @@ class GameInstaller(
                                 pair.second.endTask?.endTask(activity, it)
                             }
                         }
+                    }.finallyTask {
+                        // Reload the version list cache so freshly installed versions appear
+                        // automatically (the versions list UI listens for the refresh event).
+                        VersionsManager.refresh("GameInstaller:installDone", false)
                     }.onThrowable { e ->
                         Tools.showErrorRemote(e)
                     }.execute()

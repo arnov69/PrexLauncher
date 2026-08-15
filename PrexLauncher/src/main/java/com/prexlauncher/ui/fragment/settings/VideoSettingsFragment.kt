@@ -107,14 +107,20 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         val context = requireActivity()
 
         val renderers = Renderers.getCompatibleRenderers(context).first
+        // "Auto (Recommended)" lets each Minecraft version pick its best renderer
+        // (MobileGlues for 1.21+, GL4ES for older versions).
+        val rendererNames = renderers.rendererNames.toMutableList()
+        val rendererIdentifiers = renderers.rendererIdentifier.toMutableList()
+        rendererNames.add(context.getString(R.string.setting_renderer_auto))
+        rendererIdentifiers.add("")
         ListSettingsWrapper(
             context,
             AllSettings.renderer,
             binding.rendererLayout,
             binding.rendererTitle,
             binding.rendererValue,
-            renderers.rendererNames.toTypedArray(),
-            renderers.rendererIdentifier.toTypedArray()
+            rendererNames.toTypedArray(),
+            rendererIdentifiers.toTypedArray()
         )
 
         binding.rendererDownload.setOnClickListener { ZHTools.openLink(context, UrlManager.URL_FCL_RENDERER_PLUGIN) }

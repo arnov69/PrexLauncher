@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:ignore="UseSwitchCompatOrMaterialXml"
+    android:background="@color/settings_bg"
+    android:theme="@style/ThemePrexSettings">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:id="@+id/custom_controls_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_control"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/disableGestures_layout"
@@ -43,7 +45,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableGestures"
                     android:text="@string/setting_disable_gestures_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/disableGestures_summary"
@@ -78,7 +80,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableDoubleTap"
                     android:text="@string/setting_disable_swap_hand_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/disableDoubleTap_summary"
@@ -113,7 +115,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_longpress_trigger_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/timeLongPressTrigger_summary"
@@ -154,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -164,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/pedit_control"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/buttonscale_layout"
@@ -181,7 +183,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_button_scale_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/buttonscale_summary"
@@ -230,7 +232,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/buttonAllCaps"
                     android:text="@string/setting_button_allcaps_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/buttonAllCaps_summary"
@@ -257,7 +259,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -267,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_virtual_mouse"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/mousescale_layout"
@@ -284,7 +286,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/mouse_settings_scale_name"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/mousescale_summary"
@@ -333,7 +335,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/mouse_settings_speed_name"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/mousespeed_summary"
@@ -379,7 +381,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_mouse_start_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/mouse_start_summary"
@@ -414,7 +416,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/custom_mouse_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/custom_mouse_summary"
@@ -433,7 +435,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -443,7 +445,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_gyro_controls"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/enableGyro_layout"
@@ -460,7 +462,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableGyro"
                     android:text="@string/setting_enable_gyro_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/enableGyro_summary"
@@ -495,7 +497,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_gyro_sensitivity_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gyroSensitivity_summary"
@@ -544,7 +546,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_gyro_sample_rate_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gyroSampleRate_summary"
@@ -593,7 +595,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroSmoothing"
                     android:text="@string/setting_gyro_smoothing_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gyroSmoothing_summary"
@@ -629,7 +631,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertX"
                     android:text="@string/setting_gyro_invert_x_axis"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gyroInvertX_summary"
@@ -664,7 +666,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertY"
                     android:text="@string/setting_gyro_invert_y_axis"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gyroInvertY_summary"
@@ -691,7 +693,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:background="@drawable/bg_settings_card_dark"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -701,7 +703,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_controller_settings"
-                android:textColor="@color/settings_category" />
+                android:textColor="@color/prex_accent_bright" />
 
             <com.prexlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/changeControllerBindings_layout"
@@ -717,7 +719,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_remap_controller_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/changeControllerBindings_summary"
@@ -743,7 +745,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:text="@string/setting_wipe_controller_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/resetControllerBindings_summary"
@@ -770,7 +772,7 @@
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/setting_deadzone_scale_title"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/settings_text_primary" />
 
                 <TextView
                     android:id="@+id/gamepad_deadzone_scale_summary"
